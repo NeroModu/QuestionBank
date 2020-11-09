@@ -12,7 +12,7 @@ class Solution:
             rev = rev * 10 + a
             x = x // 10
             
-        if abs(rev) >= 2 ** 31 - 1:
+        if abs(rev) > 2 ** 31 - 1:
             return 0
         
         return rev if not neg else rev * -1
