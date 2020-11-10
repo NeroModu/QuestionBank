@@ -50,3 +50,33 @@ for i in range(len(flowerbed)):
       flowerbed[i] = 1
       n -= 1
 ```
+
+Then we return True only if there are no more flowers.
+```
+return n == 0
+```
+
+We should also add a check at the beginning of each loop iteration if n has reached zero, to avoid continuing to loop if we don't need to.
+```
+if n == 0:
+  return True
+```
+## Special cases
+We need to check flowerbeds that are smaller than 3, as these will break when checking the adjacent spots, but still might provide a valid solution. Because of this, the check should go at the beginning of the function.
+```
+if len(flowerbed) < 3:
+```
+
+Now we know that in flowerbeds smaller than 3, nothing will fit if even one flower is already planted. So if there exists a flower, only `n == 0` is valid.
+```
+if 1 in flowerbed:
+  return n == 0
+```
+
+But if the flowerbed is empty, up to one flower can fit, making both `n == 0` and `n == 1` valid.
+```
+else:
+  return n <= 1
+```
+
+And thats it! Check [Solution.py](https://github.com/NeroModu/QuestionBank/blob/master/LeetCode/605.%20Can%20Place%20Flowers/Solution.py) for full answer
