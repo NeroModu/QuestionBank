@@ -32,3 +32,7 @@ Sample Output:
 25200
 88200
 ```
+
+https://www.hackerrank.com/challenges/python-time-delta/problem
+
+## Solution
