@@ -30,6 +30,18 @@ def parse_timezone(xxxx):
     seconds = (int(minutes) * 60) + (int(hours) * 3600)
     return seconds * sign
 
+def is_leap(year):
+    leap = False
+    if ( (year % 100 == 0) and (year % 400 != 0) ):
+        leap = False
+    else:
+        if (year % 4 == 0):
+            leap = True
+        else:
+            leap = False
+
+    return leap
+
 def time_delta(t1, t2):
     t1 = t1.split()[1:]
     t2 = t2.split()[1:]
@@ -62,6 +74,10 @@ def time_delta(t1, t2):
     # Add seconds in year
     t1_Seconds += int(t1[2]) * 86400 * 365
     t2_Seconds += int(t2[2]) * 86400 * 365
+    
+    # Add seconds in leap day
+    t1_Seconds += 86400 if is_leap(int(t1[2])) else 0
+    t2_Seconds += 86400 if is_leap(int(t2[2])) else 0
     
     # Return difference
     return str(abs(t1_Seconds - t2_Seconds))
