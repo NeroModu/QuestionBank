@@ -76,8 +76,10 @@ def time_delta(t1, t2):
     t2_Seconds += int(t2[2]) * 86400 * 365
     
     # Add seconds in leap day
-    t1_Seconds += 86400 if is_leap(int(t1[2])) else 0
-    t2_Seconds += 86400 if is_leap(int(t2[2])) else 0
+    t1_isAfterFeb = t1[1] != 'Jan' and t1[1] != 'Feb'
+    t2_isAfterFeb = t2[1] != 'Jan' and t2[1] != 'Feb'
+    t1_Seconds += 86400 if (is_leap(int(t1[2])) and t1_isAfterFeb) else 0
+    t2_Seconds += 86400 if (is_leap(int(t2[2])) and t2_isAfterFeb) else 0
     
     # Return difference
     return str(abs(t1_Seconds - t2_Seconds))
