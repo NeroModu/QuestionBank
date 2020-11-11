@@ -36,3 +36,42 @@ Sample Output:
 https://www.hackerrank.com/challenges/python-time-delta/problem
 
 ## Solution
+
+```
+t1 = t1.split()[1:]
+t2 = t2.split()[1:]
+```
+
+```
+months = {
+  'Jan': 31,
+  'Feb': 28,
+  'Mar': 31,
+  'Apr': 30,
+  'May': 31,
+  'Jun': 30,
+  'Jul': 31,
+  'Aug': 31,
+  'Sep': 30,
+  'Oct': 31,
+  'Nov': 30,
+  'Dec': 31
+}
+```
+
+```
+months = {
+  'Jan': 0,
+  'Feb': 31,
+  'Mar': 59,
+  'Apr': 90,
+  'May': 120,
+  'Jun': 151,
+  'Jul': 181,
+  'Aug': 212,
+  'Sep': 243,
+  'Oct': 273,
+  'Nov': 304,
+  'Dec': 334
+}
+```
