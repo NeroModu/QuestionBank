@@ -88,6 +88,6 @@ What? How long are these test cases?
 
 Well maybe that's what makes this problem hard. Potential solution: Don't use nested for loops.
 
-We should probably optimize this code somehow to not run in `O(n^2)` time.
+We should probably optimize this code somehow to not run in `O(n*m)` time.
 
 
