@@ -10,6 +10,11 @@ import sys
 def arrayManipulation(n, queries):
     arr = [0] * (n + 1)
     for q in queries:
+        for i in range(q[0], q[1] + 1):
+            arr[i] += q[2]
+    
+    arr.sort(reverse=True)
+    return arr[0]
         
 
 if __name__ == '__main__':
