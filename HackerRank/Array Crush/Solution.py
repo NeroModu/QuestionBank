@@ -10,11 +10,19 @@ import sys
 def arrayManipulation(n, queries):
     arr = [0] * (n + 1)
     for q in queries:
-        for i in range(q[0], q[1] + 1):
-            arr[i] += q[2]
+        a = q[0] - 1
+        b = q[1]
+        k = q[2]
+        arr[a] += k
+        arr[b] -= k
     
-    arr.sort(reverse=True)
-    return arr[0]
+    biggest = 0
+    running_total = 0
+    for i in arr:
+        running_total += i
+        if running_total > biggest:
+            biggest = running_total
+    return biggest
         
 
 if __name__ == '__main__':
