@@ -86,8 +86,75 @@ And thats it! We've completed the probl-
 
 What? How long are these test cases?
 
-Well maybe that's what makes this problem hard. Potential solution: Don't use nested for loops.
-
 We should probably optimize this code somehow to not run in `O(n*m)` time.
 
+Well maybe that's what makes this problem hard. Potential solution: Don't try to access every element in the array.
 
+## New Solution
+
+Initialize our array.
+```
+arr = [0] * (n + 1)
+```
+
+Loop thru queries.
+```
+for q in queries:
+```
+
+Now it gets interesting. Before we were looping through the *entire* range from `a` to `b` for every one of our queries. Since this was too slow, what we can do instead is only increment `arr[a - 1]` by `k`, then *decrement* `arr[b]` by `k`. Essentially, this changes what our array represents. Now, every non-zero value represents how the 0s between them differ from what comes before and after.
+
+So lets do it. To clarify what each element of `q` means, lets name them.
+```
+a = q[0] - 1
+b = q[1]
+k = q[2]
+```
+`a` gets one subtracted to account for the indexing starting at 1.
+
+Now we just add `k` to `arr[a]` and subtract `k` from `arr[b]`.
+```
+arr[a] += k
+arr[b] -= k
+```
+
+Now we leave the loop. Next, we need to iterate down the array adding or subtracting each element to a counter. We also need to keep track of when this counter is at its highest, and return that.
+```
+biggest = 0
+    running_total = 0
+    for i in arr:
+        running_total += i
+        if running_total > biggest:
+            biggest = running_total
+    return biggest
+```
+
+## Explanation
+
+Lets look at this example:
+```
+5 3
+1 2 100
+2 5 100
+3 4 100
+```
+
+Previously, we were doing this:
+```
+1) [0   0   0   0   0]
+2) [100 100 0   0   0]
+3) [100 200 100 100 100]
+4) [100 200 200 200 100]
+```
+However, it turns out you do not need to update each element between the first and last. You only need to record the *change* at each start and end location. Like in the 3rd update, the only reason element 2 changes to 200 is because earlier the ending location for the update landed on that spot.
+
+Imagine the final array instead representing something like this.
+```
+300 
+200    --------- 
+100 ---         ---
+000
+     |  |  |  |  |
+     1  2  3  4  5
+```
+What we did was modify each start and end *change* rather than cumulative total. Pretty wild stuff.
