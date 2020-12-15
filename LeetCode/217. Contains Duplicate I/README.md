@@ -49,7 +49,13 @@ def containsDuplicate(self, nums: List[int]) -> bool:
     return False
 ```
 While this method uses less space, since there is no new list created, it turns out the count() method loops through the entire list each time, making this even more inefficient than the previous solution at `O(n^2)`
-### 3. Use len()
 
+### 3. Use set() & len()
+For this solution we leverage the power of Python, using a built in conversion tool `set()`. Since sets cannot have duplicates, when a list is converted to a set, all duplicates are removed. So if we make a set out of our list, then compare that set's length to the length of our list, we can see if any duplicates were found.
+```python
+def containsDuplicate(self, nums: List[int]) -> bool:
+    return len(nums) != len(set(nums))
+```
+It only returns true if the length of the set is different, meaning a duplicate was found and removed. This also has a runtime of `O(n log(n))` but it avoids using extra memory to make a copy of the entire list.
 
 ### 4. 
