@@ -37,9 +37,19 @@ def containsDuplicate(self, nums: List[int]) -> bool:
 
     return False
 ```
+You could also use a set instead, since no duplicates should appear. But in any case this is a relatively inefficient solution clocking in at `O(n log(n))`
 
-### 2. Use list.count
-
+### 2. Use list.count()
+This solution does not use a new list. Instead it just checks how many times each element appears, and if it's ever over one, returns true.
+```python
+def containsDuplicate(self, nums: List[int]) -> bool:
+    for i in nums:
+        if nums.count(i) > 1:
+            return True
+    return False
+```
+While this method uses less space, since there is no new list created, it turns out the count() method loops through the entire list each time, making this even more inefficient than the previous solution at `O(n^2)`
 ### 3. Use len()
+
 
 ### 4. 
