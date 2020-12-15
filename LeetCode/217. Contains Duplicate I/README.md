@@ -58,4 +58,16 @@ def containsDuplicate(self, nums: List[int]) -> bool:
 ```
 It only returns true if the length of the set is different, meaning a duplicate was found and removed. This also has a runtime of `O(n log(n))` but it avoids using extra memory to make a copy of the entire list.
 
-### 4. 
+### 4. Use a hashmap
+Hashmaps give us the advantage of looking up an element much quicker. So this implementation is a lot similar to the first, only this time using Python's built in hashmap known as dictionaries.
+```python
+def containsDuplicate(self, nums: List[int]) -> bool:
+    map = dict()
+    for i in nums:
+        if i in map:
+            return True
+        else:
+            map[i] = None
+    return False
+```
+Now we're looking at an `O(n)` solution.
