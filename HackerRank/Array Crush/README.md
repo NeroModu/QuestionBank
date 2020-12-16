@@ -54,27 +54,27 @@ https://www.hackerrank.com/challenges/crush/problem
 This problem is marked as hard, yet it seems pretty straightforward. This scares me.
 
 Okay so we start by defining an array of 0s of size `n+1`. We need the extra one because the problem specifies the array is 1-indexed.
-```
+```python
 arr = [0] * (n + 1)
 ```
 
 Now we loop through all the queries.
-```
+```python
 for q in queries:
 ```
 
 Next we loop through the range given by `a` and `b`. (`q[0]` and `q[1]`).
-```
+```python
 for i in range(q[0], q[1]+1):
 ```
 
 Then we simply increment that spot in our array by `k` (`q[2]`).
-```
+```python
 arr[i] += q[2]
 ```
 
 Once outside the loop, we need to get the largest element in our array. One easy way to do this is to sort it, then return the first element.
-```
+```python
 arr.sort(reverse=True)
 return arr[0]
 ```
@@ -93,19 +93,19 @@ Well maybe that's what makes this problem hard. Potential solution: Don't try to
 ## New Solution
 
 Initialize our array.
-```
+```python
 arr = [0] * (n + 1)
 ```
 
 Loop thru queries.
-```
+```python
 for q in queries:
 ```
 
 Now it gets interesting. Before we were looping through the *entire* range from `a` to `b` for every one of our queries. Since this was too slow, what we can do instead is only increment `arr[a - 1]` by `k`, then *decrement* `arr[b]` by `k`. Essentially, this changes what our array represents. Now, every non-zero value represents how the 0s between them differ from what comes before and after.
 
 So lets do it. To clarify what each element of `q` means, lets name them.
-```
+```python
 a = q[0] - 1
 b = q[1]
 k = q[2]
@@ -113,13 +113,13 @@ k = q[2]
 `a` gets one subtracted to account for the indexing starting at 1.
 
 Now we just add `k` to `arr[a]` and subtract `k` from `arr[b]`.
-```
+```python
 arr[a] += k
 arr[b] -= k
 ```
 
 Now we leave the loop. Next, we need to iterate down the array adding or subtracting each element to a counter. We also need to keep track of when this counter is at its highest, and return that.
-```
+```python
 biggest = 0
     running_total = 0
     for i in arr:
@@ -149,7 +149,7 @@ Previously, we were doing this:
 However, it turns out you do not need to update each element between the first and last. You only need to record the *change* at each start and end location. Like in the 3rd update, the only reason element 2 changes to 200 is because earlier the ending location for the update landed on that spot.
 
 Imagine the final array instead representing something like this.
-```
+```python
 300 
 200    --------- 
 100 ---         ---
