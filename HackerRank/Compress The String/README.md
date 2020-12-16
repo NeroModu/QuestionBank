@@ -37,19 +37,19 @@ Okay they want us to use `groupby()`. What does that even do? I've never used th
 I came across [this article](https://www.quora.com/How-can-we-use-itertools-groupby-in-Python-3) that explains it pretty clearly. Who knew quora would ever come in handy?
 
 Anyway so it seems like we need to build tuples for every series of repeating ints. Lets start by making an empty list to hold all our tuples.
-```
+```python
 encodings = []
 ```
 
 Now we use `groupby()`. (BTW `line` refers to the input)
-```
+```python
 for group, items in itertools.groupby(line):
 ```
 
 The function seems to give us a common element (`group`) and a list of its repeated contents (`items`). We don't need this list, since we're only being asked for the ammount of times they repeat.
 
 So lets get the length.
-```
+```python
 length = len(items)
 ```
 #### Error!
@@ -58,17 +58,17 @@ length = len(items)
 Oops! What the hell is an `itertools._grouper`?
 
 Okay so this works.
-```
+```python
 length = len(list(items))
 ```
 
 Now we can build our tuple and add it to our list of them.
-```
+```python
 compression = (length, group)
 encodings.append(compression)
 ```
 Now we exit the loop and start a new one. This time we loop thru our list of tuples, printing each one like they want us to.
-```
+```python
 for tup in encodings:
   print(tup, end=' ')
 ```
@@ -81,7 +81,7 @@ The `end=' '` specifies not to put a newline after each one.
 Well damn.
 
 Since our input line was a string, the grouping keys are all strings. We'll just have to format it manually.
-```
+```python
 tup_formatted = "({0})".format(', '.join(map(str, tup)))
 print(tup_formatted, end=' ')
 ```
